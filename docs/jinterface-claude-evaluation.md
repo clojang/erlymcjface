@@ -157,54 +157,75 @@ The [original evaluation document](https://github.com/clojang/erlymcjface/blob/c
 ### New Architecture
 
 ```
-org.erlang.otp/
-├── core/
-│   ├── node/                    # Node management
-│   │   ├── ErlangNode.java
-│   │   ├── NodeConfig.java
-│   │   └── NodeLifecycle.java
-│   ├── process/                 # Process abstractions
-│   │   ├── ErlangProcess.java
-│   │   ├── ProcessId.java
-│   │   ├── ProcessRegistry.java
-│   │   └── ProcessScheduler.java
-│   ├── mailbox/                 # Mailbox implementation
-│   │   ├── Mailbox.java
-│   │   ├── MailboxId.java
-│   │   └── MessageQueue.java
-│   └── supervision/             # Supervision trees
-│       ├── Supervisor.java
-│       ├── SupervisionStrategy.java
-│       └── ChildSpec.java
-├── behavior/                    # OTP behaviors
-│   ├── GenServer.java
-│   ├── GenStateMachine.java
-│   ├── GenEvent.java
-│   └── Application.java
-├── transport/                   # Communication layer
-│   ├── Distribution.java
-│   ├── DistributionProtocol.java
-│   ├── Connection.java
-│   └── ConnectionPool.java
-├── term/                        # Erlang terms
-│   ├── Term.java               # Sealed interface
-│   ├── Atom.java
-│   ├── Number.java
-│   ├── Binary.java
-│   ├── List.java
-│   ├── Tuple.java
-│   ├── Map.java
-│   ├── Pid.java
-│   ├── Port.java
-│   └── Reference.java
-├── codec/                       # Encoding/decoding
-│   ├── TermEncoder.java
-│   ├── TermDecoder.java
-│   └── ExternalFormat.java
-└── util/                        # Utilities
-    ├── Result.java             # Error handling
-    ├── Try.java
-    └── AsyncResult.java
+erlymcjface/                     # Parent project
+├── pom.xml                      # Parent POM with module definitions
+├── core/                        # Core functionality module
+│   ├── pom.xml
+│   └── src/main/java/io/github/clojang/mcjface/core/
+│       ├── node/                # Node management
+│       │   ├── ErlangNode.java
+│       │   ├── NodeConfig.java
+│       │   └── NodeLifecycle.java
+│       ├── process/             # Process abstractions
+│       │   ├── ErlangProcess.java
+│       │   ├── ProcessId.java
+│       │   ├── ProcessRegistry.java
+│       │   └── ProcessScheduler.java
+│       ├── mailbox/             # Mailbox implementation
+│       │   ├── Mailbox.java
+│       │   ├── MailboxId.java
+│       │   └── MessageQueue.java
+│       └── transport/           # Connection management
+│           ├── Connection.java
+│           └── ConnectionPool.java
+├── otp/                         # OTP behaviors and supervision module
+│   ├── pom.xml
+│   └── src/main/java/io/github/clojang/mcjface/otp/
+│       ├── server/              # OTP servers
+│       │   ├── GenServer.java
+│       │   ├── GenStateMachine.java
+│       │   └── GenEvent.java
+│       ├── supervision/         # Supervision trees  
+│       │   ├── Supervisor.java
+│       │   ├── SupervisionStrategy.java
+│       │   └── ChildSpec.java
+│       └── app/                 # OTP applications
+│           └── Application.java
+├── etf/                         # External Term Format module
+│   ├── pom.xml
+│   └── src/main/java/io/github/clojang/mcjface/etf/
+│       ├── term/                # Erlang terms
+│       │   ├── Term.java        # Sealed interface
+│       │   ├── Atom.java
+│       │   ├── Number.java
+│       │   ├── Binary.java
+│       │   ├── List.java
+│       │   ├── Tuple.java
+│       │   ├── Map.java
+│       │   ├── Pid.java
+│       │   ├── Port.java
+│       │   └── Reference.java
+│       ├── codec/               # Encoding/decoding
+│       │   ├── TermEncoder.java
+│       │   ├── TermDecoder.java
+│       │   └── ExternalFormat.java
+│       └── dist/                # Distribution protocol
+│           ├── Distribution.java
+│           └── DistributionProtocol.java
+├── util/                        # Utilities module
+│   ├── pom.xml
+│   └── src/main/java/io/github/clojang/mcjface/util/
+│       ├── Result.java         # Error handling
+│       ├── Try.java
+│       └── AsyncResult.java
+└── integration/                 # Integration tests & examples
+    ├── pom.xml
+    └── src/test/java/io/github/clojang/mcjface/integration/
+        ├── ErlangInteropTest.java
+        ├── OtpBehaviorTest.java
+        └── examples/
+            ├── ChatServer.java
+            └── DistributedCalculator.java
 ```
 
 ### Key Classes and Interfaces
