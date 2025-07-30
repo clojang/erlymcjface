@@ -123,9 +123,9 @@ No implementation of core OTP behaviors:
 - No proper process lifecycle management
 - No hot code swapping support
 
-## Critique of Provided Evaluation
+## Critique of Original Evaluation
 
-The provided evaluation document makes several good observations but has some weaknesses:
+The [original evaluation document](https://github.com/clojang/erlymcjface/blob/c77dbf6bd760dde52a10c558986f59328c10b7c0/docs/jinterface-claude-evaluation.md) makes several good observations but has some weaknesses:
 
 ### Strengths of the Evaluation
 
