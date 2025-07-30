@@ -1,4 +1,4 @@
-package io.github.clojang.mcjface.core.transport;
+package io.github.clojang.mcjface.net;
 
 import io.github.clojang.mcjface.core.process.ProcessId;
 import io.github.clojang.mcjface.etf.term.Term;
@@ -55,7 +55,7 @@ public final class Connection implements AutoCloseable {
     }
     
     @Override
-    public void close() throws Exception {
+    public void close() {
         closed.set(true);
     }
 }

@@ -1,4 +1,4 @@
-package io.github.clojang.mcjface.core.transport;
+package io.github.clojang.mcjface.net;
 
 import io.github.clojang.mcjface.core.process.ProcessId;
 import io.github.clojang.mcjface.etf.term.Term;

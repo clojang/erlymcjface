@@ -11,10 +11,11 @@
     <packaging>pom</packaging>
     
     <modules>
+        <module>modules/util</module>
+        <module>modules/etf</module>
+        <module>modules/net</module>
         <module>modules/core</module>
         <module>modules/otp</module>
-        <module>modules/etf</module>
-        <module>modules/util</module>
         <module>modules/integration</module>
     </modules>
 

@@ -1,7 +1,7 @@
 package io.github.clojang.mcjface.etf.term;
 
 public sealed interface Number extends Term 
-    permits Integer, Long, Double, BigInteger {
+    permits Number.Integer, Number.Long, Number.Double, Number.BigInteger {
     
     java.lang.Number numberValue();
     

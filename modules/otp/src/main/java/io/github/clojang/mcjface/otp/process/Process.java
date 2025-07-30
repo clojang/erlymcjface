@@ -1,10 +1,9 @@
-package io.github.clojang.mcjface.otp.behavior;
+package io.github.clojang.mcjface.otp.process;
 
 import io.github.clojang.mcjface.core.process.ProcessId;
 import io.github.clojang.mcjface.etf.term.Term;
 
-public sealed interface ProcessBehavior 
-    permits GenServer, GenStateMachine, GenEvent {
+public interface Process {
     
     ProcessId self();
     void receive(Message message);

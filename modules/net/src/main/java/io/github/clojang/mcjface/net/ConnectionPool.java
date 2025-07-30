@@ -1,4 +1,4 @@
-package io.github.clojang.mcjface.core.transport;
+package io.github.clojang.mcjface.net;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CompletableFuture;

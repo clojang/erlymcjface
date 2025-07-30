@@ -1,6 +1,15 @@
 package io.github.clojang.mcjface.etf.codec;
 
-import io.github.clojang.mcjface.etf.term.*;
+import io.github.clojang.mcjface.etf.term.Atom;
+import io.github.clojang.mcjface.etf.term.Binary;
+import io.github.clojang.mcjface.etf.term.List;
+import io.github.clojang.mcjface.etf.term.Map;
+import io.github.clojang.mcjface.etf.term.Number;
+import io.github.clojang.mcjface.etf.term.Pid;
+import io.github.clojang.mcjface.etf.term.Port;
+import io.github.clojang.mcjface.etf.term.Reference;
+import io.github.clojang.mcjface.etf.term.Term;
+import io.github.clojang.mcjface.etf.term.Tuple;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
@@ -115,6 +124,8 @@ public class TermDecoder {
     }
     
     public static class DecodeException extends Exception {
+        private static final long serialVersionUID = 1L;
+        
         public DecodeException(String message) {
             super(message);
         }

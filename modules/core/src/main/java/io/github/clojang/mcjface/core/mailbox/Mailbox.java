@@ -47,7 +47,7 @@ public final class Mailbox implements AutoCloseable {
     }
     
     @Override
-    public void close() throws Exception {
+    public void close() {
         messages.clear();
     }
     

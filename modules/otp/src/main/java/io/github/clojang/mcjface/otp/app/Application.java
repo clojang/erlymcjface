@@ -1,11 +1,11 @@
-package io.github.clojang.mcjface.otp.behavior;
+package io.github.clojang.mcjface.otp.app;
 
 import io.github.clojang.mcjface.core.process.ProcessId;
-import io.github.clojang.mcjface.core.supervision.Supervisor;
 import io.github.clojang.mcjface.etf.term.Term;
+import io.github.clojang.mcjface.otp.process.Process;
 import java.util.List;
 
-public abstract class Application implements ProcessBehavior {
+public abstract class Application implements Process {
     
     protected abstract StartResult start(StartType startType, List<Term> args);
     
