@@ -409,6 +409,11 @@
                 <configuration>
                     <suppressionFile>config/owasp-suppressions.xml</suppressionFile>
                     <failBuildOnCVSS>7</failBuildOnCVSS>
+                    <!-- NVD API Key from environment variable NVD_API_KEY -->
+                    <!-- Get your free API key from: https://nvd.nist.gov/developers/request-an-api-key -->
+                    <nvdApiKey>${env.NVD_API_KEY}</nvdApiKey>
+                    <nvdMaxRetryCount>10</nvdMaxRetryCount>
+                    <nvdApiDelay>4000</nvdApiDelay>
                 </configuration>
                 <executions>
                     <execution>
