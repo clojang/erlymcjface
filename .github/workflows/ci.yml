@@ -173,6 +173,9 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-maven-
           
+    - name: Build modules for dependency resolution
+      run: mvn clean install -DskipTests -Dmaven.gpg.skip=true
+      
     - name: Run OWASP Dependency Check
       env:
         NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
