@@ -32,6 +32,15 @@
             <artifactId>slf4j-api</artifactId>
         </dependency>
 
+        <!-- SpotBugs annotations for suppression -->
+        <dependency>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs-annotations</artifactId>
+            <version>4.8.6</version>
+            <scope>compile</scope>
+            <optional>true</optional>
+        </dependency>
+
         <!-- Test Dependencies -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
