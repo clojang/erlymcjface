@@ -50,17 +50,20 @@ public final class Try {
     
     /**
      * Execute a supplier with a specific exception type.
+     * If an unexpected exception type occurs, returns a Result with Exception instead of the specific type.
      */
-    public static <T, E extends Exception> Result<T, E> ofType(
+    public static <T, E extends Exception> Result<T, Exception> ofType(
             Class<E> exceptionType, 
             Supplier<T> supplier) {
         try {
             return Result.ok(supplier.get());
         } catch (Exception e) {
             if (exceptionType.isInstance(e)) {
+                // Expected exception type - cast and return
                 return Result.error(exceptionType.cast(e));
             }
-            throw new RuntimeException("Unexpected exception type", e);
+            // Unexpected exception type - return as generic Exception
+            return Result.error(e);
         }
     }
     

@@ -96,14 +96,14 @@ public class AsyncResult<T, E> {
   }
 
   public CompletableFuture<Result<T, E>> toCompletableFuture() {
-    return future;
+    return future.thenApply(result -> result);
   }
 
-  public CompletableFuture<T> toCompletableFutureUnwrapped() {
+  public CompletableFuture<Result<T, String>> toCompletableFutureUnwrapped() {
     return future.thenApply(Result::unwrap);
   }
 
   public CompletionStage<Result<T, E>> toCompletionStage() {
-    return future;
+    return future.thenApply(result -> result);
   }
 }

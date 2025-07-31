@@ -1,7 +1,7 @@
 # Makefile for Erly McJFace
 # Provides convenient commands for development workflow
 
-.PHONY: help build clean test lint format publish-local check-types install deps version release just-publish publish micro+ minor+ major+
+.PHONY: help build clean test lint format publish-local check-types install deps version release just-publish publish micro+ minor+ major+ check-updates
 
 PROJ_DISPLAY := Erly McJFace
 PROJ := erlymcjfac
@@ -133,10 +133,15 @@ dependency-tree: ## Show dependency tree
 dependency-updates: ## Check for dependency updates
 	@echo "$(BLUE)Checking for dependency updates...$(RESET)"
 	$(MVN) versions:display-dependency-updates
+	@echo "$(GREEN)✅ Dependency update check completed$(RESET)"
 
 plugin-updates: ## Check for plugin updates
 	@echo "$(BLUE)Checking for plugin updates...$(RESET)"
 	$(MVN) versions:display-plugin-updates
+	@echo "$(GREEN)✅ Plugin update check completed$(RESET)"
+
+check-updates: dependency-updates plugin-updates ## Check for all dependency and plugin updates
+	@echo "$(GREEN)✅ All update checks completed$(RESET)"
 
 security-check: ## Run security vulnerability check
 	@echo "$(BLUE)Running security vulnerability check...$(RESET)"
