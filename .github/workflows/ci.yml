@@ -42,7 +42,7 @@ jobs:
       if: success() || failure()
       with:
         name: Maven Tests (${{ matrix.java }} on ${{ matrix.os }})
-        path: target/surefire-reports/*.xml
+        path: '**/target/surefire-reports/*.xml'
         reporter: java-junit
         fail-on-error: true
         
@@ -137,7 +137,7 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
         mvn clean verify sonar:sonar \
-          -Dsonar.projectKey=clojang_clojog \
+          -Dsonar.projectKey=clojang_erlymcjface \
           -Dsonar.organization=clojang \
           -Dsonar.host.url=https://sonarcloud.io \
           -Dmaven.gpg.skip=true

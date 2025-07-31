@@ -171,9 +171,6 @@
                         <include>**/*Test.java</include>
                         <include>**/*Tests.java</include>
                     </includes>
-                    <systemPropertyVariables>
-                        <java.util.logging.manager>org.apache.logging.log4j.jul.LogManager</java.util.logging.manager>
-                    </systemPropertyVariables>
                 </configuration>
             </plugin>
 
@@ -414,8 +411,14 @@
                     <!-- NVD API Key from environment variable NVD_API_KEY -->
                     <!-- Get your free API key from: https://nvd.nist.gov/developers/request-an-api-key -->
                     <nvdApiKey>${env.NVD_API_KEY}</nvdApiKey>
-                    <nvdMaxRetryCount>10</nvdMaxRetryCount>
-                    <nvdApiDelay>4000</nvdApiDelay>
+                    <nvdMaxRetryCount>3</nvdMaxRetryCount>
+                    <nvdApiDelay>6000</nvdApiDelay>
+                    <!-- Skip NVD update if API key is not available -->
+                    <skipNvdApiUpdate>${env.NVD_API_KEY == null}</skipNvdApiUpdate>
+                    <!-- Fallback to cached data when API fails -->
+                    <nvdDatafeedUrl>https://nvd.nist.gov/feeds/json/cve/1.1/</nvdDatafeedUrl>
+                    <!-- Don't fail build on update errors -->
+                    <failOnError>false</failOnError>
                 </configuration>
                 <executions>
                     <execution>
