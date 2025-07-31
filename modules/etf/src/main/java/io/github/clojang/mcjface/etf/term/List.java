@@ -67,8 +67,12 @@ public record List(Term[] elements) implements Term, Iterable<Term> {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj) return true;
-    if (!(obj instanceof List other)) return false;
+    if (this == obj) {
+      return true;
+    }
+    if (!(obj instanceof List other)) {
+      return false;
+    }
     return Arrays.equals(elements, other.elements);
   }
 

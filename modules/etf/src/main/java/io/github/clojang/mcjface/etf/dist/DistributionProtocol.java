@@ -1,8 +1,8 @@
 package io.github.clojang.mcjface.etf.dist;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.github.clojang.mcjface.etf.term.Term;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DistributionProtocol {
@@ -48,18 +48,18 @@ public class DistributionProtocol {
     return null;
   }
 
-  // SpotBugs incorrectly flags this as "representation exposure" because it doesn't recognize
-  // that List.of() returns truly immutable implementations. List.of() creates instances of
-  // ImmutableCollections.ListN which cannot be modified after creation. This is a false
-  // positive - the code is actually safer than mutable array alternatives. Records are
-  // immutable by design and these Lists are genuinely immutable instances.
-  @SuppressFBWarnings(
-      value = {"EI_EXPOSE_REP", "EI_EXPOSE_REP2", "US_USELESS_SUPPRESSION_ON_CLASS"},
-      justification =
-          "List.of() creates immutable lists; SpotBugs inconsistently detects this immutability")
   public record DistributionMessage(MessageType type, List<Term> terms) {
+    public DistributionMessage {
+      terms = new ArrayList<>(terms);
+    }
+
     public DistributionMessage(MessageType type, Term... terms) {
       this(type, List.of(terms));
+    }
+
+    @Override
+    public List<Term> terms() {
+      return new ArrayList<>(terms);
     }
   }
 }

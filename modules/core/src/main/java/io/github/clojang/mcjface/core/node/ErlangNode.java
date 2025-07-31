@@ -14,6 +14,10 @@ public final class ErlangNode implements AutoCloseable {
     return new ErlangNode(config);
   }
 
+  public NodeConfig getConfig() {
+    return config;
+  }
+
   public CompletableFuture<Void> shutdown(Duration timeout) {
     return CompletableFuture.completedFuture(null);
   }

@@ -8,8 +8,12 @@ public record Reference(String node, int creation, long[] ids) implements Term {
   public Reference {
     Objects.requireNonNull(node, "Node cannot be null");
     Objects.requireNonNull(ids, "IDs cannot be null");
-    if (creation < 0) throw new IllegalArgumentException("Creation must be non-negative");
-    if (ids.length == 0) throw new IllegalArgumentException("IDs cannot be empty");
+    if (creation < 0) {
+      throw new IllegalArgumentException("Creation must be non-negative");
+    }
+    if (ids.length == 0) {
+      throw new IllegalArgumentException("IDs cannot be empty");
+    }
     ids = ids.clone(); // Defensive copy
   }
 
@@ -34,8 +38,12 @@ public record Reference(String node, int creation, long[] ids) implements Term {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj) return true;
-    if (!(obj instanceof Reference other)) return false;
+    if (this == obj) {
+      return true;
+    }
+    if (!(obj instanceof Reference other)) {
+      return false;
+    }
     return Objects.equals(node, other.node)
         && creation == other.creation
         && Arrays.equals(ids, other.ids);

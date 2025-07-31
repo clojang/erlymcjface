@@ -6,9 +6,15 @@ public record Pid(String node, long id, long serial, int creation) implements Te
 
   public Pid {
     Objects.requireNonNull(node, "Node cannot be null");
-    if (id < 0) throw new IllegalArgumentException("ID must be non-negative");
-    if (serial < 0) throw new IllegalArgumentException("Serial must be non-negative");
-    if (creation < 0) throw new IllegalArgumentException("Creation must be non-negative");
+    if (id < 0) {
+      throw new IllegalArgumentException("ID must be non-negative");
+    }
+    if (serial < 0) {
+      throw new IllegalArgumentException("Serial must be non-negative");
+    }
+    if (creation < 0) {
+      throw new IllegalArgumentException("Creation must be non-negative");
+    }
   }
 
   @Override

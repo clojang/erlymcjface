@@ -3,6 +3,7 @@ package io.github.clojang.mcjface.core.mailbox;
 import io.github.clojang.mcjface.core.process.ProcessId;
 import io.github.clojang.mcjface.etf.term.Term;
 import java.time.Duration;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CompletableFuture;
@@ -43,8 +44,20 @@ public final class Mailbox implements AutoCloseable {
     // Stub implementation
   }
 
-  public void deliver(Message message) {
-    messages.offer(message);
+  public boolean deliver(Message message) {
+    return messages.offer(message);
+  }
+
+  public ProcessId getOwner() {
+    return owner;
+  }
+
+  public Set<ProcessId> getLinks() {
+    return new HashSet<>(links);
+  }
+
+  public Set<ProcessId> getMonitors() {
+    return new HashSet<>(monitors);
   }
 
   @Override

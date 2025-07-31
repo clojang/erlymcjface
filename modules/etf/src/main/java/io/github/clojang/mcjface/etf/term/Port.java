@@ -6,8 +6,12 @@ public record Port(String node, long id, int creation) implements Term {
 
   public Port {
     Objects.requireNonNull(node, "Node cannot be null");
-    if (id < 0) throw new IllegalArgumentException("ID must be non-negative");
-    if (creation < 0) throw new IllegalArgumentException("Creation must be non-negative");
+    if (id < 0) {
+      throw new IllegalArgumentException("ID must be non-negative");
+    }
+    if (creation < 0) {
+      throw new IllegalArgumentException("Creation must be non-negative");
+    }
   }
 
   @Override

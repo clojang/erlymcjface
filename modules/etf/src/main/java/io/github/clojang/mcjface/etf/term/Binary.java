@@ -35,8 +35,12 @@ public record Binary(byte[] bytes) implements Term {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj) return true;
-    if (!(obj instanceof Binary other)) return false;
+    if (this == obj) {
+      return true;
+    }
+    if (!(obj instanceof Binary other)) {
+      return false;
+    }
     return Arrays.equals(bytes, other.bytes);
   }
 

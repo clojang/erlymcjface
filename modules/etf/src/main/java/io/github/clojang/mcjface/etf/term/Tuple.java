@@ -39,8 +39,12 @@ public record Tuple(Term[] elements) implements Term {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj) return true;
-    if (!(obj instanceof Tuple other)) return false;
+    if (this == obj) {
+      return true;
+    }
+    if (!(obj instanceof Tuple other)) {
+      return false;
+    }
     return Arrays.equals(elements, other.elements);
   }
 

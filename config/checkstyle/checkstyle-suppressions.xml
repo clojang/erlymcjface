@@ -29,5 +29,7 @@
     <!-- Allow operator wrapping flexibility -->
     <suppress checks="OperatorWrap" files=".*\.java"/>
     
+    <!-- Suppress ConstantName for 'logger' fields following standard Java convention -->
+    <suppress checks="ConstantName" files=".*\.java" message="Name 'logger' must match pattern"/>
 
 </suppressions>

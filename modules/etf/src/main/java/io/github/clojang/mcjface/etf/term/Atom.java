@@ -29,8 +29,12 @@ public record Atom(String value) implements Term {
   }
 
   public boolean booleanValue() {
-    if (this.equals(TRUE)) return true;
-    if (this.equals(FALSE)) return false;
+    if (this.equals(TRUE)) {
+      return true;
+    }
+    if (this.equals(FALSE)) {
+      return false;
+    }
     throw new IllegalStateException("Atom is not a boolean: " + value);
   }
 }
