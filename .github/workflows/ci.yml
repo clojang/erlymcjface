@@ -135,12 +135,20 @@ jobs:
         if [ -z "$SONAR_TOKEN" ]; then
           echo "Skipping SonarCloud analysis - SONAR_TOKEN not configured"
         else
+          echo "Running SonarCloud analysis..."
           mvn clean verify sonar:sonar \
             -Dsonar.projectKey=clojang_erlymcjface \
             -Dsonar.organization=clojang \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=$SONAR_TOKEN \
-            -Dmaven.gpg.skip=true
+            -Dmaven.gpg.skip=true || {
+              echo "SonarCloud analysis failed. Common issues:"
+              echo "1. Project 'clojang_erlymcjface' may not exist in SonarCloud"
+              echo "2. Automatic Analysis may be enabled (disable it in project settings)"
+              echo "3. SONAR_TOKEN may be invalid"
+              echo "Visit: https://sonarcloud.io/projects"
+              exit 1
+            }
         fi
 
   security:
