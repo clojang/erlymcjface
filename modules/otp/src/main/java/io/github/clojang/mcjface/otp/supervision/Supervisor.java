@@ -4,6 +4,7 @@ import io.github.clojang.mcjface.core.process.ProcessId;
 import io.github.clojang.mcjface.etf.term.Term;
 import io.github.clojang.mcjface.otp.process.Process;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -30,7 +31,16 @@ public abstract class Supervisor implements Process {
   protected abstract SupervisorSpec init(List<Term> args);
 
   public record SupervisorSpec(
-      RestartStrategy strategy, int maxRestarts, Duration maxTime, List<ChildSpec> children) {}
+      RestartStrategy strategy, int maxRestarts, Duration maxTime, List<ChildSpec> children) {
+    public SupervisorSpec {
+      children = new ArrayList<>(children);
+    }
+
+    @Override
+    public List<ChildSpec> children() {
+      return new ArrayList<>(children);
+    }
+  }
 
   public record ChildSpec(
       String id,
