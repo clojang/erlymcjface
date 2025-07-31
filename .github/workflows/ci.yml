@@ -127,6 +127,7 @@ jobs:
         restore-keys: ${{ runner.os }}-sonar
         
     - name: Run SonarCloud analysis
+      if: ${{ secrets.SONAR_TOKEN != '' }}
       shell: bash
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -136,7 +137,12 @@ jobs:
           -Dsonar.projectKey=clojang_erlymcjface \
           -Dsonar.organization=clojang \
           -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
           -Dmaven.gpg.skip=true
+          
+    - name: Skip SonarCloud analysis
+      if: ${{ secrets.SONAR_TOKEN == '' }}
+      run: echo "Skipping SonarCloud analysis - SONAR_TOKEN not configured"
 
   security:
     name: Security Scan
