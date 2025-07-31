@@ -25,6 +25,8 @@ The key improvements include:
 This redesign will result in a library that is not only more robust and maintainable but also more aligned with both
 Erlang/OTP principles and modern Java best practices.
 
+Note that, due to our use of such features as pattern matching and sealed interfaces, this library requires Java 21 or later.
+
 [//]: ---Named-Links---
 
 [logo]: resources/images/logo.png
