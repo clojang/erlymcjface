@@ -241,6 +241,8 @@
                     <detectJavaApiLink>false</detectJavaApiLink>
                     <additionalJOptions>
                         <additionalJOption>-Xdoclint:none</additionalJOption>
+                        <additionalJOption>-classpath</additionalJOption>
+                        <additionalJOption>${session.executionRootDirectory}/modules/util/target/classes:${session.executionRootDirectory}/modules/etf/target/classes:${session.executionRootDirectory}/modules/net/target/classes:${session.executionRootDirectory}/modules/core/target/classes:${session.executionRootDirectory}/modules/otp/target/classes</additionalJOption>
                     </additionalJOptions>
                 </configuration>
                 <executions>

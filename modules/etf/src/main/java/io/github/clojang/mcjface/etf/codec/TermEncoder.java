@@ -1,5 +1,7 @@
 package io.github.clojang.mcjface.etf.codec;
 
+import static io.github.clojang.mcjface.etf.codec.EtfConstants.*;
+
 import io.github.clojang.mcjface.etf.term.Atom;
 import io.github.clojang.mcjface.etf.term.Binary;
 import io.github.clojang.mcjface.etf.term.List;
@@ -10,11 +12,13 @@ import io.github.clojang.mcjface.etf.term.Port;
 import io.github.clojang.mcjface.etf.term.Reference;
 import io.github.clojang.mcjface.etf.term.Term;
 import io.github.clojang.mcjface.etf.term.Tuple;
+import io.github.clojang.mcjface.util.Logging;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import org.slf4j.Logger;
 
 public class TermEncoder {
-  private static final int VERSION_TAG = 131; // Magic number for external format
+  private static final Logger logger = Logging.getLogger(TermEncoder.class);
 
   public byte[] encode(Term term) throws IOException {
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -41,67 +45,67 @@ public class TermEncoder {
   }
 
   private void encodeAtom(Atom atom, ByteArrayOutputStream out) throws IOException {
-    // Stub implementation
-    out.write(100); // ATOM_EXT tag
+    logger.debug("encodeAtom not implemented for atom: {}", atom);
+    out.write(ATOM_EXT);
   }
 
   private void encodeInteger(Number.Integer integer, ByteArrayOutputStream out) throws IOException {
-    // Stub implementation
-    out.write(97); // SMALL_INTEGER_EXT tag
+    logger.debug("encodeInteger not implemented for integer: {}", integer);
+    out.write(SMALL_INTEGER_EXT);
   }
 
   private void encodeLong(Number.Long longNum, ByteArrayOutputStream out) throws IOException {
-    // Stub implementation
-    out.write(98); // INTEGER_EXT tag
+    logger.debug("encodeLong not implemented for long: {}", longNum);
+    out.write(INTEGER_EXT);
   }
 
   private void encodeDouble(Number.Double doubleNum, ByteArrayOutputStream out) throws IOException {
-    // Stub implementation
-    out.write(70); // NEW_FLOAT_EXT tag
+    logger.debug("encodeDouble not implemented for double: {}", doubleNum);
+    out.write(NEW_FLOAT_EXT);
   }
 
   private void encodeBigInteger(Number.BigInteger bigInt, ByteArrayOutputStream out)
       throws IOException {
-    // Stub implementation
-    out.write(110); // SMALL_BIG_EXT tag
+    logger.debug("encodeBigInteger not implemented for bigInt: {}", bigInt);
+    out.write(SMALL_BIG_EXT);
   }
 
   private void encodeBinary(Binary binary, ByteArrayOutputStream out) throws IOException {
-    // Stub implementation
-    out.write(109); // BINARY_EXT tag
+    logger.debug("encodeBinary not implemented for binary with {} bytes", binary.size());
+    out.write(BINARY_EXT);
   }
 
   private void encodeList(List list, ByteArrayOutputStream out) throws IOException {
-    // Stub implementation
-    out.write(108); // LIST_EXT tag
+    logger.debug("encodeList not implemented for list with {} elements", list.size());
+    out.write(LIST_EXT);
   }
 
   private void encodeTuple(Tuple tuple, ByteArrayOutputStream out) throws IOException {
-    // Stub implementation
-    if (tuple.arity() <= 255) {
-      out.write(104); // SMALL_TUPLE_EXT tag
+    logger.debug("encodeTuple not implemented for tuple with arity: {}", tuple.arity());
+    if (tuple.arity() <= MAX_BYTE_VALUE) {
+      out.write(SMALL_TUPLE_EXT);
     } else {
-      out.write(105); // LARGE_TUPLE_EXT tag
+      out.write(LARGE_TUPLE_EXT);
     }
   }
 
   private void encodeMap(Map map, ByteArrayOutputStream out) throws IOException {
-    // Stub implementation
-    out.write(116); // MAP_EXT tag
+    logger.debug("encodeMap not implemented for map with {} entries", map.size());
+    out.write(MAP_EXT);
   }
 
   private void encodePid(Pid pid, ByteArrayOutputStream out) throws IOException {
-    // Stub implementation
-    out.write(103); // PID_EXT tag
+    logger.debug("encodePid not implemented for pid: {}", pid);
+    out.write(PID_EXT);
   }
 
   private void encodePort(Port port, ByteArrayOutputStream out) throws IOException {
-    // Stub implementation
-    out.write(102); // PORT_EXT tag
+    logger.debug("encodePort not implemented for port: {}", port);
+    out.write(PORT_EXT);
   }
 
   private void encodeReference(Reference ref, ByteArrayOutputStream out) throws IOException {
-    // Stub implementation
-    out.write(114); // NEW_REFERENCE_EXT tag
+    logger.debug("encodeReference not implemented for reference: {}", ref);
+    out.write(NEW_REFERENCE_EXT);
   }
 }

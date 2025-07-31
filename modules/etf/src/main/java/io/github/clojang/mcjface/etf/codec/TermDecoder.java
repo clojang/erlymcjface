@@ -1,5 +1,7 @@
 package io.github.clojang.mcjface.etf.codec;
 
+import static io.github.clojang.mcjface.etf.codec.EtfConstants.*;
+
 import io.github.clojang.mcjface.etf.term.Atom;
 import io.github.clojang.mcjface.etf.term.Binary;
 import io.github.clojang.mcjface.etf.term.List;
@@ -10,11 +12,13 @@ import io.github.clojang.mcjface.etf.term.Port;
 import io.github.clojang.mcjface.etf.term.Reference;
 import io.github.clojang.mcjface.etf.term.Term;
 import io.github.clojang.mcjface.etf.term.Tuple;
+import io.github.clojang.mcjface.util.Logging;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import org.slf4j.Logger;
 
 public class TermDecoder {
-  private static final int VERSION_TAG = 131; // Magic number for external format
+  private static final Logger logger = Logging.getLogger(TermDecoder.class);
 
   public Term decode(byte[] data) throws IOException, DecodeException {
     if (data.length == 0) {
@@ -37,19 +41,19 @@ public class TermDecoder {
     }
 
     return switch (tag) {
-      case 97 -> decodeSmallInteger(in); // SMALL_INTEGER_EXT
-      case 98 -> decodeInteger(in); // INTEGER_EXT
-      case 100 -> decodeAtom(in); // ATOM_EXT
-      case 102 -> decodePort(in); // PORT_EXT
-      case 103 -> decodePid(in); // PID_EXT
-      case 104 -> decodeSmallTuple(in); // SMALL_TUPLE_EXT
-      case 105 -> decodeLargeTuple(in); // LARGE_TUPLE_EXT
-      case 108 -> decodeList(in); // LIST_EXT
-      case 109 -> decodeBinary(in); // BINARY_EXT
-      case 110 -> decodeSmallBig(in); // SMALL_BIG_EXT
-      case 114 -> decodeNewReference(in); // NEW_REFERENCE_EXT
-      case 116 -> decodeMap(in); // MAP_EXT
-      case 70 -> decodeNewFloat(in); // NEW_FLOAT_EXT
+      case SMALL_INTEGER_EXT -> decodeSmallInteger(in);
+      case INTEGER_EXT -> decodeInteger(in);
+      case ATOM_EXT -> decodeAtom(in);
+      case PORT_EXT -> decodePort(in);
+      case PID_EXT -> decodePid(in);
+      case SMALL_TUPLE_EXT -> decodeSmallTuple(in);
+      case LARGE_TUPLE_EXT -> decodeLargeTuple(in);
+      case LIST_EXT -> decodeList(in);
+      case BINARY_EXT -> decodeBinary(in);
+      case SMALL_BIG_EXT -> decodeSmallBig(in);
+      case NEW_REFERENCE_EXT -> decodeNewReference(in);
+      case MAP_EXT -> decodeMap(in);
+      case NEW_FLOAT_EXT -> decodeNewFloat(in);
       default -> throw new DecodeException("Unknown tag: " + tag);
     };
   }
@@ -60,22 +64,22 @@ public class TermDecoder {
   }
 
   private Term decodeInteger(ByteArrayInputStream in) throws IOException {
-    // Stub implementation - read 4 bytes big endian
+    logger.debug("decodeInteger not implemented, available bytes: {}", in.available());
     return new Number.Integer(0);
   }
 
   private Term decodeAtom(ByteArrayInputStream in) throws IOException {
-    // Stub implementation - read length then string
+    logger.debug("decodeAtom not implemented, available bytes: {}", in.available());
     return new Atom("stub");
   }
 
   private Term decodePort(ByteArrayInputStream in) throws IOException, DecodeException {
-    // Stub implementation
+    logger.debug("decodePort not implemented, available bytes: {}", in.available());
     return new Port("node", 0, 0);
   }
 
   private Term decodePid(ByteArrayInputStream in) throws IOException, DecodeException {
-    // Stub implementation
+    logger.debug("decodePid not implemented, available bytes: {}", in.available());
     return new Pid("node", 0, 0, 0);
   }
 
@@ -89,37 +93,37 @@ public class TermDecoder {
   }
 
   private Term decodeLargeTuple(ByteArrayInputStream in) throws IOException, DecodeException {
-    // Stub implementation - read 4 bytes for arity
+    logger.debug("decodeLargeTuple not implemented, available bytes: {}", in.available());
     return Tuple.of();
   }
 
   private Term decodeList(ByteArrayInputStream in) throws IOException, DecodeException {
-    // Stub implementation
+    logger.debug("decodeList not implemented, available bytes: {}", in.available());
     return List.empty();
   }
 
   private Term decodeBinary(ByteArrayInputStream in) throws IOException {
-    // Stub implementation
+    logger.debug("decodeBinary not implemented, available bytes: {}", in.available());
     return new Binary(new byte[0]);
   }
 
   private Term decodeSmallBig(ByteArrayInputStream in) throws IOException {
-    // Stub implementation
+    logger.debug("decodeSmallBig not implemented, available bytes: {}", in.available());
     return new Number.BigInteger(java.math.BigInteger.ZERO);
   }
 
   private Term decodeNewReference(ByteArrayInputStream in) throws IOException {
-    // Stub implementation
+    logger.debug("decodeNewReference not implemented, available bytes: {}", in.available());
     return new Reference("node", 0, new long[] {0});
   }
 
   private Term decodeMap(ByteArrayInputStream in) throws IOException, DecodeException {
-    // Stub implementation
+    logger.debug("decodeMap not implemented, available bytes: {}", in.available());
     return Map.of();
   }
 
   private Term decodeNewFloat(ByteArrayInputStream in) throws IOException {
-    // Stub implementation
+    logger.debug("decodeNewFloat not implemented, available bytes: {}", in.available());
     return new Number.Double(0.0);
   }
 

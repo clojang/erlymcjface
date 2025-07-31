@@ -106,7 +106,10 @@ verify: ## Run full verification (compile, test, lint)
 
 install: ## Install to local repository (~/.m2)
 	@echo "$(BLUE)Installing to local repository...$(RESET)"
-	$(MVN) clean install
+	@echo "$(YELLOW)Step 1: Installing util module first...$(RESET)"
+	$(MVN) clean install -pl :util -am -DskipTests
+	@echo "$(YELLOW)Step 2: Installing remaining modules...$(RESET)"
+	$(MVN) install -DskipTests
 	@echo "$(GREEN)✅ Installed to ~/.m2/repository$(RESET)"
 
 force-install: ## Force-install to local repository (~/.m2)
