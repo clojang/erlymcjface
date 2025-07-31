@@ -78,7 +78,7 @@ jobs:
           
     - name: Build and Package
       shell: bash
-      run: mvn clean package -DskipTests -Dmaven.gpg.skip=true
+      run: mvn clean install -DskipTests -Dmaven.gpg.skip=true
       
     - name: Generate Javadoc
       shell: bash
