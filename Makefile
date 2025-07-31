@@ -99,7 +99,7 @@ check-types: ## Validate types and compilation
 	$(MVN) compiler:testCompile
 	@echo "$(GREEN)✅ Type checking completed$(RESET)"
 
-verify: ## Run full verification (compile, test, lint)
+verify: format ## Run full verification (compile, test, lint)
 	@echo "$(BLUE)Running full verification...$(RESET)"
 	$(MVN) verify
 	@echo "$(GREEN)✅ Verification completed$(RESET)"
