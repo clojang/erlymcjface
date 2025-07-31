@@ -244,5 +244,8 @@ fabric.properties
 *.orig
 *.rej
 
+# Resources
+/resources/images/drafts
+
 # AI
 /.claude
